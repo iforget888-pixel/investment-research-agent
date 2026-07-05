@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+.DS_Store
+__pycache__/
+*.pyc
+.venv/
+logs/
+*.log
+.appwrite-backups/
+.codeflicker/
+tmp/
+agent/tmp/
