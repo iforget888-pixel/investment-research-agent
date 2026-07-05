@@ -20,8 +20,25 @@ It does not carry over the old AI-weekly taxonomy, Appwrite client, source list,
 ## Local Development
 
 ```bash
-npm install
-npm run dev
+pnpm install
+pnpm run dev
 ```
 
 Backend selection is intentionally open. The current recommendation is a Docker-based local stack rather than Appwrite.
+
+## Local Backend
+
+The first backend scaffold uses Docker:
+
+```bash
+cp .env.example .env
+docker compose up --build
+```
+
+Services:
+
+- API: http://localhost:8000
+- API health: http://localhost:8000/health
+- Postgres: localhost:5432
+- Redis: localhost:6379
+- MinIO: http://localhost:9001
