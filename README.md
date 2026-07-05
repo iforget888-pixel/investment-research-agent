@@ -28,7 +28,7 @@ Backend selection is intentionally open. The current recommendation is a Docker-
 
 ## Local Backend
 
-The first backend scaffold uses Docker:
+The first backend scaffold uses Docker Desktop:
 
 ```bash
 cp .env.example .env

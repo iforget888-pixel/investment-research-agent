@@ -38,3 +38,21 @@ PATCH  /raw-materials/{material_id}
 The API layer deliberately avoids agent logic. It stores the research state and raw inputs. Agent workers will later consume raw materials, produce evidence, update thesis impact, and generate weekly briefs.
 
 The current schema is created automatically on API startup. That is acceptable for the first scaffold; once tables stabilize, migrations should move to Alembic.
+
+## End-To-End Verification
+
+The first validated local loop is:
+
+```text
+Docker Desktop -> docker compose -> FastAPI -> PostgreSQL -> watchlist item -> raw material
+```
+
+Validated requests:
+
+```bash
+curl http://localhost:8000/health
+curl -X POST http://localhost:8000/watchlist
+curl -X POST http://localhost:8000/raw-materials
+```
+
+The first test used `NVIDIA / NVDA` as an AI-infrastructure public equity watchlist item and created one linked manual note as raw material.
