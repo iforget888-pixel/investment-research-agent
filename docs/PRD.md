@@ -40,7 +40,17 @@ The product should be organized around these objects:
 - **Memo**: a periodic or event-driven synthesis for human review
 - **Decision log**: what changed, what was decided, and why
 
-## 4. Information Inputs
+## 4. Product Decisions
+
+The following decisions define the MVP direction:
+
+- **Industry scope**: the system should be industry-neutral. AI can be used as the first test industry, but no core workflow or schema should depend on AI-specific categories.
+- **Asset scope**: the MVP focuses on public equities. Important private firms inside a tracked industry can be followed as context, but they should remain lighter-weight unless they become IPO candidates or materially affect public-company theses.
+- **Financial data**: financial and market data should come from APIs rather than manual entry as the default path. Manual entry can exist as a fallback for early testing or niche metrics.
+- **First memo format**: start with weekly briefs. This keeps the first product loop useful without requiring heavy historical tracking from day one.
+- **Privacy posture**: default to local-first storage for personal notes, interviews, and investment judgments. External LLM/API calls should be explicit and designed so sensitive material can be redacted or summarized before leaving the local environment.
+
+## 5. Information Inputs
 
 MVP inputs:
 
@@ -49,19 +59,19 @@ MVP inputs:
 - PDFs and screenshots
 - company filings and earnings materials
 - interview / call notes
-- manually entered financial metrics
+- financial and market data from APIs
+- manually entered financial metrics as fallback
 
 Later inputs:
 
-- market data APIs
 - transcript APIs
 - structured industry datasets
 - broker / portfolio exports
 - vector search over historical notes and memos
 
-## 5. Core Workflows
+## 6. Core Workflows
 
-### 5.1 Set Research Scope
+### 6.1 Set Research Scope
 
 The user creates a watchlist:
 
@@ -72,7 +82,7 @@ The user creates a watchlist:
 - key metrics to monitor
 - important sources
 
-### 5.2 Collect Information
+### 6.2 Collect Information
 
 The system collects and stores raw material:
 
@@ -82,7 +92,7 @@ The system collects and stores raw material:
 - fetched / ingested date
 - linked company, industry, theme, or thesis when known
 
-### 5.3 Extract Evidence
+### 6.3 Extract Evidence
 
 The agent converts raw material into structured evidence:
 
@@ -96,7 +106,7 @@ The agent converts raw material into structured evidence:
 - confidence and source quality
 - citation back to original material
 
-### 5.4 Update Thesis View
+### 6.4 Update Thesis View
 
 The agent compares new evidence against active theses:
 
@@ -106,11 +116,11 @@ The agent compares new evidence against active theses:
 - neutral but worth tracking
 - opens a new research question
 
-### 5.5 Produce Memos
+### 6.5 Produce Memos
 
 The product should generate:
 
-- daily or weekly change brief
+- weekly change brief
 - company update memo
 - industry / theme memo
 - earnings or filing memo
@@ -119,7 +129,7 @@ The product should generate:
 
 Each memo must preserve citations and separate facts from interpretation.
 
-## 6. MVP Scope
+## 7. MVP Scope
 
 The first build should include:
 
@@ -127,6 +137,7 @@ The first build should include:
 - frontend research workspace shell
 - watchlist CRUD
 - manual information ingestion
+- financial data API integration
 - PDF / screenshot text extraction
 - evidence extraction with citations
 - simple thesis objects
@@ -137,12 +148,13 @@ The MVP can defer:
 
 - automated trading integration
 - complex portfolio analytics
-- paid market-data integrations
 - multi-user permissions
 - mobile UI
 - full knowledge graph visualization
+- heavy private-company data modeling
+- deep historical performance attribution
 
-## 7. Product Principles
+## 8. Product Principles
 
 - Evidence first: every important claim needs a source.
 - Human final judgment: the agent assists, but does not decide.
@@ -150,16 +162,30 @@ The MVP can defer:
 - Prefer fewer high-quality signals over noisy coverage.
 - Preserve raw material for later re-interpretation.
 - Make changes to a thesis explicit over time.
+- Keep industry logic configurable, not hard-coded.
+- Treat private notes and investment judgments as sensitive by default.
 
-## 8. Open Product Questions
+## 9. Privacy And Local-First Behavior
 
-- Is the first domain still AI companies, or should the system be industry-neutral from day one?
-- Should the MVP focus on public equities only, or include private companies and themes?
-- Should financial data be manually entered first, or connected to APIs early?
-- What is the first memo format: weekly brief, company memo, or decision memo?
-- How much local-only privacy is required for interview notes and personal research?
+Local-only privacy means sensitive research material is stored and processed on infrastructure the user controls, rather than being silently synced to a third-party application backend.
 
-## 9. Suggested Next Step
+For this product, the practical rule is:
+
+- raw interview notes, personal judgments, and decision logs stay local-first
+- API calls for financial data are expected and acceptable
+- LLM calls are allowed, but should be explicit, logged, and designed for redaction when needed
+- public information can be fetched from the internet and stored locally with source attribution
+
+This does not mean the product can never use cloud services. It means the default architecture should not require personal research notes to live in a third-party backend before the user chooses that tradeoff.
+
+## 10. Remaining Product Questions
+
+- Which financial data API should be used first?
+- Should the first watchlist use AI public equities as the test set?
+- What exact fields should a weekly brief contain?
+- How much interview-note processing should happen in the MVP?
+
+## 11. Suggested Next Step
 
 Agree on the MVP research loop before designing database tables:
 

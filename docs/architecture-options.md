@@ -16,6 +16,7 @@ Recommended first stack:
 - Queue / cache: Redis
 - Workers: Python agent workers
 - Object storage: MinIO
+- External data: financial data API provider, selected separately
 - Scheduler: worker cron or Temporal later
 - Search: PostgreSQL full text first, OpenSearch later only if needed
 
@@ -31,7 +32,7 @@ For this personal investment agent, the tradeoffs are different:
 - evidence needs strong provenance and queryability
 - agent jobs need background execution and retries
 - vector search will likely matter
-- local privacy may matter for interviews and notes
+- local-first privacy matters for interviews, notes, and investment judgments
 - Docker is available, so the backend can be owned end to end
 
 Appwrite can still be considered later if speed of CRUD UI becomes more important than backend control.
@@ -101,7 +102,7 @@ Cons:
 Start with Option A:
 
 ```text
-PostgreSQL + pgvector + MinIO + Redis + API + Python workers
+PostgreSQL + pgvector + MinIO + Redis + API + Python workers + financial data API
 ```
 
 Do not implement the backend until the PRD research loop is agreed. The first schema should be derived from product objects, not from the old Appwrite tables.
